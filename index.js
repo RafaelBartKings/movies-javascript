@@ -70,10 +70,29 @@ const onMovieSelect = async (movie, summaryElement, side) => {
 }
 
 const runComparison = () => {
-  console.log('Time for comparison')
+  
+
 }
 
 const movieTemplate = movieDetail => {
+
+  const dollars = parseInt(movieDetail.BoxOffice.replace(/\$/g, '').replace(/,/g, ''))
+  const metascore = parseInt(movieDetail.Metascore);
+  const imdbRating = parseFloat(movieDetail.imdbRating);
+  const imdbVotes = parseInt(movieDetail.imdbVotes.replace(/,/g, '')); 
+
+  const awards = movieDetail.Awards.split(' ').reduce((prev, word) => {
+    const value = parseInt(word);
+
+    if (isNaN(value)) {
+      return prev;
+    } else {
+      return prev + value;
+    }
+  }, 0);
+
+  console.log(awards);
+
   return `
   <article class="media">
     <figure class="media-left">
